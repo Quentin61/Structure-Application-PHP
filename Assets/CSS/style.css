@@ -1,0 +1,93 @@
+body{
+    margin: 0;
+}
+
+nav{
+    background-color: darkgrey;
+    flex-flow: row wrap;
+    display: flex;
+    justify-content: flex-start;
+    height: 3em;
+}
+
+button{
+    border-radius: 10px;
+    border-width: 1px;
+    background-color: slategray;
+    margin: 1%;
+    color: white;
+    padding: 0.4em;
+}
+
+input{
+    padding:0.2em;
+    border-style: solid solid solid solid;
+    border-radius: 10px;
+    border-width: 1px;
+    border-color: lightgrey;
+}
+
+main{
+    padding-left: 3%;
+    padding-right: 3%;
+}
+
+footer{
+    background-color: grey;
+    height: 1.5em;
+}
+
+.menuItem{
+    display: block;
+    text-decoration: none;
+    padding: 0.75em;
+    color: white;
+}
+
+.menuItem:hover{
+    background-color: slategray;
+    transition: 0.3s background-color;
+}
+
+.contentPage{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.logForm{
+    text-align: center;
+}
+
+.logForm input{
+    margin: 1%;
+
+}
+
+.feedback{
+    border: 1px solid lightgrey;
+    text-align: center;
+    border-radius: 5px;
+    padding-top: 0;
+    color: white;
+    margin: 5%;
+    width: 15%;
+}
+
+.title{
+    text-align: center;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.error{
+    background-color: rgba(205,92,92, 0.7);
+    font-weight: bold;
+}
+
+.warning{
+    background-color: rgba(255,165,0,0.7);
+}
+
+.succes{
+    background-color: lightgreen;
+}

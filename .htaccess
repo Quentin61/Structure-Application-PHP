@@ -1,0 +1,8 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RedirectMatch 403 ^/folder/?$
+
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+

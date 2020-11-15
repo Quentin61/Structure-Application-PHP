@@ -1,0 +1,8 @@
+<div class="logForm">
+    <form method="POST" action="<?=$this->printData('actionFormLog')?>">
+        <label for="login">Login : </label><input id="login" type="text" name="<?=UserBuilder::getLoginField()?>" maxlength="32" value="<?=$this->printData('loginForm')?>" required><br>
+        <label for="password">Password : </label><input id="password" name="<?=UserBuilder::getPasswordField()?>" type="password" required><br>
+        <button type="submit" name="submitLog">Sign in</button>
+        <a href="<?=$this->printData('signUpURL')?>"><button type="button">Sign up</button></a>
+    </form>
+</div>
