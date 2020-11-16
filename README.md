@@ -13,7 +13,7 @@ Ce projet fournit une structure de base pour le développement d'une application
 
 ## Installation 
 
-- Copiez l'ensemble du projet dans un répertoire local.(si vous utilisez WAMP, copié les dans le répertoire de développement)
+- Copiez l'ensemble du projet dans un répertoire local.(si vous utilisez WAMP, copiez les dans le répertoire de développement)
 - Installez la base de données à l'aide du fichier BDD.sql qui contient les requêtes pour mettre en place les tables
 - (optionnel) Changez la valeur du mode dans le constructeur de Models/Managers/AbstractManager.php pour passer sur un base de données 
 locale ou distante
