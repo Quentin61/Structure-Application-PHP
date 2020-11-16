@@ -36,6 +36,7 @@ class Router
         $this->request();
         $this->run();
         if(isset($_SESSION['feedback']))unset($_SESSION['feedback']);
+        if(isset($_SESSION['builder']))unset($_SESSION['builder']);
     }
 
     /**

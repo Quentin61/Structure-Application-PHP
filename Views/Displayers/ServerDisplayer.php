@@ -13,8 +13,7 @@ class ServerDisplayer extends AbstractDisplayer
     {
         $this->data = $data;
         $this->data['menu'] = parent::makeMenu();
-        $this->data['feedback'] = !isset($_SESSION['feedback']["message"])?"":$_SESSION['feedback']["message"];
-        $this->data['feedbackType'] = !isset($_SESSION['feedback']["type"])?"":$_SESSION['feedback']["type"];
+        $this->data = parent::getFeedback($this->data);
         $this->includedTemplates['content']="Views/Templates/server/404.html";
     }
 }

@@ -29,11 +29,24 @@ abstract class AbstractDisplayer
         return (!key_exists($dataName,$this->data)?"":$this->data[$dataName]);
     }
 
-    protected function getUnpostedForm($data){
-        $reflection = new ReflectionClass(get_class($_SESSION['builder']));
+    protected function getUnpostedForm($data, $builderName){
+
+        $reflection = new ReflectionClass($builderName);
         $staticsfunctions = $reflection->getMethods(ReflectionMethod::IS_STATIC);
         foreach ($staticsfunctions as $function)
-            $data[$_SESSION['builder']::{$function->getName()}()]=$_SESSION['builder']->getUnPostData()[$_SESSION['builder']::{$function->getName()}()];
+        {
+            if(isset($_SESSION['builder']))
+                $data[$builderName::{$function->getName()}()]=$_SESSION['builder']->getUnPostData()[$_SESSION['builder']::{$function->getName()}()];
+            else
+                $data[$builderName::{$function->getName()}()]="";
+        }
+        return $data;
+    }
+
+    protected function getFeedback($data)
+    {
+        $data['feedback'] = !isset($_SESSION['feedback']["message"])?"":$_SESSION['feedback']["message"];
+        $data['feedbackType'] = !isset($_SESSION['feedback']["type"])?"":$_SESSION['feedback']["type"];
         return $data;
     }
 
