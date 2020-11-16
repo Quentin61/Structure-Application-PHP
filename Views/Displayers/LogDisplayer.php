@@ -9,6 +9,10 @@ class LogDisplayer extends AbstractDisplayer
         parent::render($this->data);
     }
 
+    /**
+     * Gestion des données de la page de connexion
+     * @param array $data tableau de données de la vue
+     */
     public function signIn(array $data)
     {
         $this->data = $data;
@@ -21,6 +25,10 @@ class LogDisplayer extends AbstractDisplayer
         $this->includedTemplates['content'] = "Views/Templates/LogPage/logForm.html";
     }
 
+    /**
+     * Gestion des données de la page d'inscription
+     * @param array $data tableau de données de la vue
+     */
     public function signUp(array $data)
     {
         $this->data= $data;
@@ -29,6 +37,7 @@ class LogDisplayer extends AbstractDisplayer
         $this->data = parent::getFeedback($this->data);
         $this->data['title'] = "Sign up";
         $this->data['actionFormSignUp'] = URL."login/sign-up";
+        $this->data['cancelFormSignUp'] = URL."login";
         $this->includedTemplates['content'] = "Views/Templates/LogPage/signUpForm.html";
     }
 }

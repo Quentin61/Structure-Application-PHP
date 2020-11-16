@@ -5,5 +5,6 @@
         <label for="password">Password :</label><input type="password" id="password" name="<?=UserBuilder::getPasswordField()?>" required><br>
         <label for="mail">Email :</label><input type="email" id="mail" name="<?=UserBuilder::getMailField()?>" value="<?=$this->printData(UserBuilder::getMailField())?>" required><br>
         <button type="submit" name="submitSignUp">create your account</button>
+        <button type="button"><a href="<?=$this->printData('cancelFormSignUp')?>">cancel</a></button>
     </form>
 </div>

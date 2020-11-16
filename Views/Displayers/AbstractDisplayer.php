@@ -3,15 +3,37 @@
 
 abstract class AbstractDisplayer
 {
+    /**
+     * @var string définition du header pour chaque pages
+     */
     private static $header = "Views/Templates/base/header.html";
+
+    /**
+     * @var string définition du footer pour chaque page
+     */
     private static $footer = "Views/Templates/base/footer.html";
+
+    /**
+     * @var string définition du conteneur main pour chaque page
+     */
     private static $main = "Views/Templates/base/content.html";
 
+    /**
+     * @var array tableau des données de la vue
+     */
     protected $data;
 
+    /**
+     * @var array tableau de chemin de blocks HTML
+     */
     protected $includedTemplates;
 
-    public function render($data, $presentation = true)
+    /**
+     * Extraction des données et affichage de la page web
+     * @param array $data tableau des données de la vue
+     * @param bool $presentation affichage du header et du footer
+     */
+    public function render(array $data, $presentation = true)
     {
         extract($data);
         ob_start();
@@ -24,32 +46,55 @@ abstract class AbstractDisplayer
         echo ob_get_clean();
     }
 
-    protected function printData($dataName)
+    /**
+     * Retourne le contenu d'une variable
+     * @param $dataName string nom de la variable
+     * @return string contenu de la variable
+     */
+    protected function printData(string $dataName)
     {
         return (!key_exists($dataName,$this->data)?"":$this->data[$dataName]);
     }
 
-    protected function getUnpostedForm($data, $builderName){
-
-        $reflection = new ReflectionClass($builderName);
-        $staticsfunctions = $reflection->getMethods(ReflectionMethod::IS_STATIC);
-        foreach ($staticsfunctions as $function)
-        {
-            if(isset($_SESSION['builder']))
-                $data[$builderName::{$function->getName()}()]=$_SESSION['builder']->getUnPostData()[$_SESSION['builder']::{$function->getName()}()];
-            else
-                $data[$builderName::{$function->getName()}()]="";
+    /**
+     * Remplit les données d'un formulaire en fonction d'un builder
+     * @param $data array tableau des données de la vue
+     * @param $builderName string nom du builder à récupérer
+     * @return array
+     */
+    protected function getUnpostedForm(array $data, string $builderName){
+        try {
+            $reflection = new ReflectionClass($builderName);
+            $staticsfunctions = $reflection->getMethods(ReflectionMethod::IS_STATIC);
+            foreach ($staticsfunctions as $function)
+            {
+                if(isset($_SESSION['builder']))
+                    $data[$builderName::{$function->getName()}()]=$_SESSION['builder']->getUnPostData()[$builderName::{$function->getName()}()];
+                else
+                    $data[$builderName::{$function->getName()}()]="";
+            }
         }
-        return $data;
+        catch (ReflectionException $exception) {}
+        finally {
+            return $data;
+        }
     }
 
-    protected function getFeedback($data)
+    /**
+     * @param $data array tableau des données de la vue
+     * @return array
+     */
+    protected function getFeedback(array $data)
     {
         $data['feedback'] = !isset($_SESSION['feedback']["message"])?"":$_SESSION['feedback']["message"];
         $data['feedbackType'] = !isset($_SESSION['feedback']["type"])?"":$_SESSION['feedback']["type"];
         return $data;
     }
 
+    /**
+     * Créé et retourne le menu
+     * @return string
+     */
     protected function makeMenu()
     {
         $menu = "";
@@ -64,7 +109,12 @@ abstract class AbstractDisplayer
         return $menu;
     }
 
-    protected function includeBlock($blockName)
+    /**
+     * Inclut un block HTML
+     * @param $blockName string Nom du block à inclure
+     * @return mixed|null
+     */
+    protected function includeBlock(string $blockName)
     {
         return key_exists($blockName,$this->includedTemplates)?$this->includedTemplates[$blockName]:null;
     }

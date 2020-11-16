@@ -9,6 +9,10 @@ class ServerDisplayer extends AbstractDisplayer
         parent::render($this->data);
     }
 
+    /**
+     * Gestion des données de la page 404
+     * @param array $data tableau de données de la vue
+     */
     public function error404(array $data)
     {
         $this->data = $data;
