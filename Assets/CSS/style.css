@@ -19,6 +19,11 @@ button{
     padding: 0.4em;
 }
 
+button:hover{
+    background-color: lightgrey;
+    transition: 0.3s background-color;
+}
+
 button a{
     color: white;
     text-decoration: none;
